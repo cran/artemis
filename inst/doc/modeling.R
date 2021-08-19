@@ -11,6 +11,10 @@ library(artemis)
 head(eDNA_data)
 str(eDNA_data)
 
+## ----eval = FALSE-------------------------------------------------------------
+#  na_vals = !complete.cases(eDNA_data)
+#  eDNA_data[na_vals,] # visual inspection
+
 ## ----warning = FALSE, eval=FALSE----------------------------------------------
 #  
 #  model_fit = eDNA_lm(Cq ~ Distance_m,
@@ -41,10 +45,10 @@ str(eDNA_data)
 #  
 #  plot(model_fit, pars = c("intercept", "betas"))
 
+## ----eval=FALSE---------------------------------------------------------------
+#  ranef(model_fit2)
+
 ## ---- eval=FALSE--------------------------------------------------------------
 #  rstan::summary(model_fit2@stanfit, pars = "rand_betas", probs = c(0.50, 0.025, 0.975))$summary
 #  plot(model_fit2, pars = "rand_betas")
-
-## ----eval=FALSE---------------------------------------------------------------
-#  ranef(model_fit2)
 

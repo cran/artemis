@@ -1,410 +1,271 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Background</title>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Getting started with the artemis package</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
-};
-</script>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
-
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
-</script>
-
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
-}
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
-}
-
-h1 {
-   font-size:2.2em;
-}
-
-h2 {
-   font-size:1.8em;
-}
-
-h3 {
-   font-size:1.4em;
-}
-
-h4 {
-   font-size:1.0em;
-}
-
-h5 {
-   font-size:0.9em;
-}
-
-h6 {
-   font-size:0.8em;
-}
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
-}
-
-pre, img {
-  max-width: 100%;
-}
-pre {
-  overflow-x: auto;
-}
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code {
-  font-size: 92%;
-  border: 1px solid #ccc;
-}
-
-code[class] {
-  background-color: #F8F8F8;
-}
-
-table, td, th {
-  border: none;
-}
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
-}
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
 @media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
 
 
 
 </head>
 
 <body>
+
+
+
+
+<h1 class="title toc-ignore">Getting started with the artemis package</h1>
+
+
+
+<div id="background" class="section level2">
 <h2>Background</h2>
-
-<p>The <code>artemis</code> R package was created to aid in the design and analysis of
-environmental DNA (eDNA) survey studies by offering a custom suite of
-models for quantitative polymerase chain reaction (qPCR) data from extracted eDNA samples. Data from eDNA sampling surveys is often analyzed with occupancy models or GLMS, but there are
-several characteristics of qPCR data in particular which made us feel that it would
-benefit from a different modeling approach.  Specifically, our approach to this data makes use of Bayesian truncated latent variable models written in <a href="https://mc-stan.org">Stan</a>.</p>
-
+<p>The <code>artemis</code> R package was created to aid in the design and analysis of environmental DNA (eDNA) survey studies by offering a custom suite of models for quantitative polymerase chain reaction (qPCR) data from extracted eDNA samples. Data from eDNA sampling surveys is often analyzed with occupancy models or GLMS, but there are several characteristics of qPCR data in particular which made us feel that it would benefit from a different modeling approach. Specifically, our approach to this data makes use of Bayesian truncated latent variable models written in <a href="https://mc-stan.org">Stan</a>.</p>
+</div>
+<div id="modeling-qpcr-edna-data-with-artemis" class="section level2">
 <h2>Modeling qPCR eDNA Data with <code>artemis</code></h2>
-
-<p>We created the <code>artemis</code> R package to implement Bayesian censored
-latent variable models, which mitigate the weaknesses of common
-statistical analysis techniques applied to qPCR data. Additionally,
-<code>artemis</code> includes utilities to aid in the design and analysis of eDNA
-survey studies, including simulation and power analysis functions.</p>
-
-<p>At its core, <code>artemis</code> is a specialized Generalized Linear
-Model, where the predictors are assumed to additively affect the
-response variable, in this case \(ln[eDNA]\), </p>
-
-<p>\[ ln[eDNA]_{i} = X_{i} \beta \] </p>
-
-<p>where \(\beta\) is a vector of effects on \(ln[eDNA]_{i}\), and \(X_{i}\)
-is a vector of predictors.  Since <code>artemis</code> directly models the
-effect of the predictors on the latent (unobserved) variable, [eDNA],
-it is unnecessary for the researcher to back-transform the data prior
-to modeling. Internally, <code>artemis</code> conducts this conversion using the
-user-supplied values for the formula,</p>
-
-<p>\[\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  \]</p>
-
-<p>Where \(\alpha_{std\_curve}\) and \(\beta_{std\_curve}\) are fixed values
-from setting the standard curve in the lab prior to qPCR.  </p>
-
-<p>Internally, the back-transformed \(ln[eDNA]_i\) values are considered a
-sample with measurement error from the true \(ln[eDNA]_i\) value
-(\(\hat{ln[eDNA]_i}\)) in the extract. </p>
-
-<p>\[ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) \]</p>
-
-<p>Where the observed \(ln[eDNA]_i\) values are censored at the
-predetermined threshold, \(U\). This threshold is back-transformed from
-the threshold on Cq. Importantly, the \(\hat{ln[eDNA]}\) values in
-the model are not censored, allowing the latent variable to reflect the &ldquo;true&rdquo;
-[eDNA] beyond the censorship point. The likelihood that a sampled \(ln[eDNA]\)
-value will exceed the threshold is a function of the measurement error
-and the estimated latent \(\hat{ln[eDNA]_i}\) value. We calculate this
-likelihood using the normal
-cumulative distribution function, \(\Phi()\),</p>
-
-<p>\[ Pr[ln[eDNA]_i > U ] = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)\]</p>
-
-<p>Thus, the models in <code>artemis</code> account for the data censoring process by
-accounting for the probability that the observed value will exceed the
-threshold. As detection limits vary with genetic assay, the upper
-threshold on Cq in the model is adjustable by the user.</p>
-
-<p>Lastly, there is an optional zero-inflated versions of both models,
-<code>eDNA_lm_zinf()</code> and <code>eDNA_lmer_zinf()</code>. From multiple experiments, it
-was observed there can be near-zero concentrations of eDNA even in
-situations where higher concentrations were expected. This was
-attributed to filter failures or other issues with sampling. To
-account for this mechanism, the zero-inflated versions of the models
-allow for zero [eDNA] concentrations from a secondary
-mechanism. Currently, the functions do not support user-provided
-predictors on the zero-inflated component, and just estimate a flat
-probability of zero detections for all observations. However, users
-can provide a prior for the expected probability of &ldquo;true&rdquo; zero
-observations from a secondary mechanism.</p>
-
+<p>We created the <code>artemis</code> R package to implement Bayesian censored latent variable models, which mitigate the weaknesses of common statistical analysis techniques applied to qPCR data. Additionally, <code>artemis</code> includes utilities to aid in the design and analysis of eDNA survey studies, including simulation and power analysis functions.</p>
+<p>At its core, <code>artemis</code> is a specialized Generalized Linear Model, where the predictors are assumed to additively affect the response variable, in this case <span class="math inline">\(ln[eDNA]\)</span>,</p>
+<p><span class="math display">\[ ln[eDNA]_{i} = X_{i} \beta \]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is a vector of effects on <span class="math inline">\(ln[eDNA]_{i}\)</span>, and <span class="math inline">\(X_{i}\)</span> is a vector of predictors. Since <code>artemis</code> directly models the effect of the predictors on the latent (unobserved) variable, [eDNA], it is unnecessary for the researcher to back-transform the data prior to modeling. Internally, <code>artemis</code> conducts this conversion using the user-supplied values for the formula,</p>
+<p><span class="math display">\[\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  \]</span></p>
+<p>Where <span class="math inline">\(\alpha_{std\_curve}\)</span> and <span class="math inline">\(\beta_{std\_curve}\)</span> are fixed values from setting the standard curve in the lab prior to qPCR.</p>
+<p>Internally, the back-transformed <span class="math inline">\(ln[eDNA]_i\)</span> values are considered a sample with measurement error from the true <span class="math inline">\(ln[eDNA]_i\)</span> value (<span class="math inline">\(\hat{ln[eDNA]_i}\)</span>) in the extract.</p>
+<p><span class="math display">\[ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) \]</span></p>
+<p>Where the observed <span class="math inline">\(ln[eDNA]_i\)</span> values are censored at the predetermined threshold, <span class="math inline">\(U\)</span>. This threshold is back-transformed from the threshold on Cq. Importantly, the <span class="math inline">\(\hat{ln[eDNA]}\)</span> values in the model are not censored, allowing the latent variable to reflect the “true” [eDNA] beyond the censorship point. The likelihood that a sampled <span class="math inline">\(ln[eDNA]\)</span> value will exceed the threshold is a function of the measurement error and the estimated latent <span class="math inline">\(\hat{ln[eDNA]_i}\)</span> value. We calculate this likelihood using the normal cumulative distribution function, <span class="math inline">\(\Phi()\)</span>,</p>
+<p><span class="math display">\[ Pr[ln[eDNA]_i &gt; U ] = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)\]</span></p>
+<p>Thus, the models in <code>artemis</code> account for the data censoring process by accounting for the probability that the observed value will exceed the threshold. As detection limits vary with genetic assay, the upper threshold on Cq in the model is adjustable by the user.</p>
+<p>Lastly, there is an optional zero-inflated versions of both models, <code>eDNA_lm_zinf()</code> and <code>eDNA_lmer_zinf()</code>. From multiple experiments, it was observed there can be near-zero concentrations of eDNA even in situations where higher concentrations were expected. This was attributed to filter failures or other issues with sampling. To account for this mechanism, the zero-inflated versions of the models allow for zero [eDNA] concentrations from a secondary mechanism. Currently, the functions do not support user-provided predictors on the zero-inflated component, and just estimate a flat probability of zero detections for all observations. However, users can provide a prior for the expected probability of “true” zero observations from a secondary mechanism.</p>
 <p>This model formulation makes several assumptions:</p>
-
-<ol>
-<li><p>\(ln[eDNA]\) is assumed to be uniform within a sample.</p></li>
-<li><p>\(ln[eDNA]\) is sampled with normally distributed errors.</p></li>
-<li><p>There are no false detections, i.e. the measurement error cannot
-result in a positive detection when eDNA is not present in the
-sample. </p></li>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(ln[eDNA]\)</span> is assumed to be uniform within a sample.</p></li>
+<li><p><span class="math inline">\(ln[eDNA]\)</span> is sampled with normally distributed errors.</p></li>
+<li><p>There are no false detections, i.e. the measurement error cannot result in a positive detection when eDNA is not present in the sample.</p></li>
 </ol>
-
-<p>Importantly, this formulation produces estimates of the effect sizes
-which:</p>
-
+<p>Importantly, this formulation produces estimates of the effect sizes which:</p>
 <ul>
-<li><p>are modeled directly on \(ln[eDNA]\) or copy number, rather than Cq, <em>therefore are independent of the standard curve and can be compared between studies that use different standard curves</em>. </p></li>
-<li><p>account for the data censoring at the upper limit of qPCR
-cycles, <em>which properly accounts for uncertainty and reduces bias in the estimates.</em></p></li>
+<li><p>are modeled directly on <span class="math inline">\(ln[eDNA]\)</span> or copy number, rather than Cq, <em>therefore are independent of the standard curve and can be compared between studies that use different standard curves</em>.</p></li>
+<li><p>account for the data censoring at the upper limit of qPCR cycles, <em>which properly accounts for uncertainty and reduces bias in the estimates.</em></p></li>
 </ul>
-
+</div>
+<div id="installing-artemis" class="section level2">
 <h2>Installing <code>artemis</code></h2>
-
 <p>The <code>artemis</code> installation guide can be found <a href="https://fishsciences.github.io/artemis/articles/artemis-installation-guide.html">here</a>.</p>
-
+</div>
+<div id="a-note-on-included-sample-data" class="section level2">
 <h2>A note on included sample data</h2>
-
-<p>Since <code>artemis</code> was originally written to analyze aquatic eDNA samples, the examples and sample data included in the package (see <code>?eDNA_data</code>) reference
-variables that are specific to aquatic eDNA survey data. These variables include <code>volume</code>
-(the the number of mililiters of water that went through the filter in
-each sample) and <code>distance</code> (the distance in meters from the source of
-eDNA).  For example, <code>eDNA_data</code> is from a &ldquo;live car&rdquo; experiment, where eDNA was sampled at known distances from a source of eDNA (fish in a net pen in unidirectional flow). </p>
-
-<p>In the following examples, <code>tech_rep</code> refers to qPCR replicates generated
- from a single extracted sample or filter; <code>rep</code> refers to a single extracted filter or sample.</p>
-
+<p>Since <code>artemis</code> was originally written to analyze aquatic eDNA samples, the examples and sample data included in the package (see <code>?eDNA_data</code>) reference variables that are specific to aquatic eDNA survey data. These variables include <code>volume</code> (the the number of mililiters of water that went through the filter in each sample) and <code>distance</code> (the distance in meters from the source of eDNA). For example, <code>eDNA_data</code> is from a “live car” experiment, where eDNA was sampled at known distances from a source of eDNA (fish in a net pen in unidirectional flow).</p>
+<p>In the following examples, <code>tech_rep</code> refers to qPCR replicates generated from a single extracted sample or filter; <code>rep</code> refers to a single extracted filter or sample.</p>
+</div>
+<div id="overview-of-artemis-functionality" class="section level2">
 <h2>Overview of <code>artemis</code> Functionality</h2>
-
-<p>The functions included in <code>artemis</code> can be grouped into a few categories; each category is either introduced in this vignette, or addressed in detail by its own vignette.  <a href="https://fishsciences.github.io/artemis/articles/">Available vignettes</a> are linked to individually below:</p>
-
-<ol>
+<p>The functions included in <code>artemis</code> can be grouped into a few categories; each category is either introduced in this vignette, or addressed in detail by its own vignette. <a href="https://fishsciences.github.io/artemis/articles/">Available vignettes</a> are linked to individually below:</p>
+<ol style="list-style-type: decimal">
 <li><a href="https://fishsciences.github.io/artemis/articles/simulation.html">Simulation of data</a></li>
 <li><a href="https://fishsciences.github.io/artemis/articles/modeling.html">Modeling data</a></li>
 <li>Conducting post-hoc analyses
-
 <ul>
 <li>estimating probability of detection, generating predictions from model fits.</li>
 </ul></li>
 <li>Conducting power and precision analyses</li>
 </ol>
-
-<p>These categories are addressed in the sections that follow.<br/>
+<p>These categories are addressed in the sections that follow.<br />
 <br></p>
-
-<p>The <code>artemis</code> package also includes methods for R&#39;s <code>plot()</code>, <code>summary()</code>, <code>data.frame()</code>, and <code>predict()</code> functions.</p>
-
+<p>The <code>artemis</code> package also includes methods for R’s <code>plot()</code>, <code>summary()</code>, <code>data.frame()</code>, and <code>predict()</code> functions.</p>
+</div>
+<div id="post-hoc-analyses-pdetect" class="section level2">
 <h2>Post-hoc analyses (<em>p(detect)</em>)</h2>
-
-<p>Often purpose of an eDNA sampling study is to inform a field sampling protocol. For these cases, we often want to know how likely we are to detect eDNA, given the way that we sampled. <code>est_p_detect()</code> returns the probability of getting a detection across all planned samples and replicates, where <code>n_rep</code> represents the product of the number of filters and technical replicates for each filter.  For example, if you planned to take 2-5 filters at each variable level and then complete 6 extractions for each filter, that would be <code>n_rep = 12:30</code>.</p>
-
-<pre><code class="r">p_detect = est_p_detect(variable_levels = c(Intercept = 1, 
-                                            Distance = 100),
-                        betas = c(Intercept = -10.5, Distance = -0.03),
-                        ln_eDNA_sd = 1, 
-                        std_curve_alpha = 21.2, std_curve_beta = -1.5,
-                        n_rep = 12:30)
-p_detect
-#&gt; Variable levels: 
-#&gt; Intercept  Distance 
-#&gt;         1       100 
-#&gt; 
-#&gt;    n_reps  p_detect
-#&gt; 1      12 0.8646429
-#&gt; 2      13 0.8854212
-#&gt; 3      14 0.9030098
-#&gt; 4      15 0.9178985
-#&gt; 5      16 0.9305016
-#&gt; 6      17 0.9411701
-#&gt; 7      18 0.9502009
-#&gt; 8      19 0.9578454
-#&gt; 9      20 0.9643164
-#&gt; 10     21 0.9697941
-#&gt; 11     22 0.9744309
-#&gt; 12     23 0.9783560
-#&gt; 13     24 0.9816785
-#&gt; 14     25 0.9844909
-#&gt; 15     26 0.9868717
-#&gt; 16     27 0.9888870
-#&gt; 17     28 0.9905929
-#&gt; 18     29 0.9920370
-#&gt; 19     30 0.9932593
-</code></pre>
-
+<p>Often purpose of an eDNA sampling study is to inform a field sampling protocol. For these cases, we often want to know how likely we are to detect eDNA, given the way that we sampled. <code>est_p_detect()</code> returns the probability of getting a detection across all planned samples and replicates, where <code>n_rep</code> represents the product of the number of filters and technical replicates for each filter. For example, if you planned to take 2-5 filters at each variable level and then complete 6 extractions for each filter, that would be <code>n_rep = 12:30</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_detect <span class="ot">=</span> <span class="fu">est_p_detect</span>(<span class="at">variable_levels =</span> <span class="fu">c</span>(<span class="at">Intercept =</span> <span class="dv">1</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">Distance =</span> <span class="dv">100</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">betas =</span> <span class="fu">c</span>(<span class="at">Intercept =</span> <span class="sc">-</span><span class="fl">10.5</span>, <span class="at">Distance =</span> <span class="sc">-</span><span class="fl">0.03</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ln_eDNA_sd =</span> <span class="dv">1</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">std_curve_alpha =</span> <span class="fl">21.2</span>, <span class="at">std_curve_beta =</span> <span class="sc">-</span><span class="fl">1.5</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n_rep =</span> <span class="dv">12</span><span class="sc">:</span><span class="dv">30</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p_detect</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Variable levels: </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Intercept  Distance </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1       100 </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    n_reps  p_detect</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      12 0.8646429</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      13 0.8854212</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      14 0.9030098</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4      15 0.9178985</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      16 0.9305016</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      17 0.9411701</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7      18 0.9502009</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8      19 0.9578454</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9      20 0.9643164</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10     21 0.9697941</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11     22 0.9744309</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12     23 0.9783560</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13     24 0.9816785</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14     25 0.9844909</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15     26 0.9868717</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16     27 0.9888870</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17     28 0.9905929</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18     29 0.9920370</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19     30 0.9932593</span></span></code></pre></div>
 <p>We can also plot this,</p>
-
-<pre><code class="r">plot(p_detect)
-</code></pre>
-
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/></p>
-
-<p>Alternatively, we can also use a fit model to estimate the p(detect)
-for a set of circumstances. Unlike the above, using a fit model allows
-us to estimate the probability of detection with the uncertainty in
-our effect size estimates taken into account.</p>
-
-<pre><code class="r">model_fit = eDNA_lm(Cq ~ Distance_m + Volume_mL, 
-                    data = eDNA_data,
-                    std_curve_alpha = 21.2, std_curve_beta = -1.5,
-                    seed = 1234,
-                    chains = 1)
-
-# Intercept is automatically supplied if in model_fit
-p_detect2 = est_p_detect(variable_levels = c(Distance_m = 100,
-                                             Volume_mL = 50),
-                        model_fit = model_fit, 
-                        n_rep = 1:12)
-
-print(p_detect2)
-
-</code></pre>
-
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p_detect)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Alternatively, we can also use a fit model to estimate the p(detect) for a set of circumstances. Unlike the above, using a fit model allows us to estimate the probability of detection with the uncertainty in our effect size estimates taken into account.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model_fit <span class="ot">=</span> <span class="fu">eDNA_lm</span>(Cq <span class="sc">~</span> Distance_m <span class="sc">+</span> Volume_mL, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> eDNA_data,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">std_curve_alpha =</span> <span class="fl">21.2</span>, <span class="at">std_curve_beta =</span> <span class="sc">-</span><span class="fl">1.5</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">chains =</span> <span class="dv">1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept is automatically supplied if in model_fit</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p_detect2 <span class="ot">=</span> <span class="fu">est_p_detect</span>(<span class="at">variable_levels =</span> <span class="fu">c</span>(<span class="at">Distance_m =</span> <span class="dv">100</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">Volume_mL =</span> <span class="dv">50</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">model_fit =</span> model_fit, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n_rep =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_detect2)</span></code></pre></div>
 <p>and we can plot the results,</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p_detect2, <span class="at">error_width =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<p><br> <br> — <br> <br></p>
+</div>
 
-<pre><code class="r">plot(p_detect2, error_width = 0.1)
-</code></pre>
 
-<p><br></p>
 
-<h2><br></h2>
+<!-- code folding -->
 
-<p><br>
-<br></p>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>

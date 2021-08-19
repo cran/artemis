@@ -21,16 +21,31 @@ data {
   int<lower=0,upper=1> has_inter;
 }
 
+transformed data {
+  matrix[N_obs + N_cens, K] Q_ast;
+  matrix[K, K] R_ast;
+  matrix[K, K] R_ast_inverse;
+  // thin and scale the QR decomposition
+  Q_ast = qr_thin_Q(append_row(X_obs, X_cens)) * sqrt((N_obs+N_cens) - 1);
+  R_ast = qr_thin_R(append_row(X_obs, X_cens)) / sqrt((N_obs+N_cens) - 1);
+  R_ast_inverse = inverse(R_ast);
+}
 parameters {
   real intercept[has_inter ? 1 : 0];
-  vector[K] betas;
+  vector[K] thetas;      // coefficients on Q_ast
   real<lower=0> sigma_ln_eDNA;
 }
 
+transformed parameters {
+  vector[K] betas;
+  betas = R_ast_inverse * thetas; // coefficients on x
+}
+
 model {
-  /* vector[N_obs] mu_obs = intercept + X_obs * betas; */
-  vector[N_cens] mu_cens = (K ? X_cens * betas : rep_vector(0.0, N_cens)) +
+  vector[N_obs + N_cens] mu_all = (K ? Q_ast * thetas : rep_vector(0.0, N_obs + N_cens)) +
 	(has_inter ? intercept[1] : 0.0);
+  vector[N_obs] mu_obs = mu_all[1:N_obs];
+  vector[N_cens] mu_cens = mu_all[(N_obs+1):];
 
   // priors
   intercept ~ normal(prior_int_mu, prior_int_sd);
@@ -40,7 +55,7 @@ model {
 
   sigma_ln_eDNA ~ normal(0, 1);
   
-  y_obs ~ normal_id_glm(X_obs, has_inter ? intercept[1] : 0.0, betas, sigma_ln_eDNA);
+  target += normal_lpdf(y_obs | mu_obs, sigma_ln_eDNA);
   target += normal_lcdf(L | mu_cens, sigma_ln_eDNA);
 }
 
