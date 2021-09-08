@@ -33,7 +33,7 @@ static int current_statement_begin__;
 stan::io::program_reader prog_reader__() {
     stan::io::program_reader reader;
     reader.add_event(0, 0, "start", "model_eDNA_lmer");
-    reader.add_event(124, 122, "end", "model_eDNA_lmer");
+    reader.add_event(128, 126, "end", "model_eDNA_lmer");
     return reader;
 }
 template <typename T0__>
@@ -366,29 +366,32 @@ public:
             stan::math::fill(u, std::numeric_limits<int>::min());
             stan::math::assign(u,csr_extract_u(X_r_all));
             // execute transformed data statements
-            current_statement_begin__ = 61;
-            stan::math::assign(Q_ast, multiply(qr_thin_Q(append_row(X_obs, X_cens)), stan::math::sqrt(((N_obs + N_cens) - 1))));
-            current_statement_begin__ = 62;
-            stan::math::assign(R_ast, divide(qr_thin_R(append_row(X_obs, X_cens)), stan::math::sqrt(((N_obs + N_cens) - 1))));
-            current_statement_begin__ = 63;
-            stan::math::assign(R_ast_inverse, inverse(R_ast));
+            current_statement_begin__ = 60;
+            if (as_bool(K)) {
+                current_statement_begin__ = 62;
+                stan::math::assign(Q_ast, multiply(qr_thin_Q(append_row(X_obs, X_cens)), stan::math::sqrt(((N_obs + N_cens) - 1))));
+                current_statement_begin__ = 63;
+                stan::math::assign(R_ast, divide(qr_thin_R(append_row(X_obs, X_cens)), stan::math::sqrt(((N_obs + N_cens) - 1))));
+                current_statement_begin__ = 64;
+                stan::math::assign(R_ast_inverse, inverse(R_ast));
+            }
             // validate transformed data
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 66;
+            current_statement_begin__ = 68;
             validate_non_negative_index("intercept", "(has_inter ? 1 : 0 )", (has_inter ? 1 : 0 ));
             num_params_r__ += (1 * (has_inter ? 1 : 0 ));
-            current_statement_begin__ = 67;
+            current_statement_begin__ = 69;
             validate_non_negative_index("thetas", "K", K);
             num_params_r__ += K;
-            current_statement_begin__ = 68;
+            current_statement_begin__ = 70;
             validate_non_negative_index("rand_betas_raw", "K_r", K_r);
             num_params_r__ += K_r;
-            current_statement_begin__ = 69;
+            current_statement_begin__ = 71;
             validate_non_negative_index("rand_sigma", "N_grp", N_grp);
             num_params_r__ += N_grp;
-            current_statement_begin__ = 70;
+            current_statement_begin__ = 72;
             num_params_r__ += 1;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -407,7 +410,7 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 66;
+        current_statement_begin__ = 68;
         if (!(context__.contains_r("intercept")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable intercept missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("intercept");
@@ -427,7 +430,7 @@ public:
                 stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable intercept: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 67;
+        current_statement_begin__ = 69;
         if (!(context__.contains_r("thetas")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable thetas missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("thetas");
@@ -444,7 +447,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable thetas: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 68;
+        current_statement_begin__ = 70;
         if (!(context__.contains_r("rand_betas_raw")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable rand_betas_raw missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("rand_betas_raw");
@@ -461,7 +464,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable rand_betas_raw: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 69;
+        current_statement_begin__ = 71;
         if (!(context__.contains_r("rand_sigma")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable rand_sigma missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("rand_sigma");
@@ -478,7 +481,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable rand_sigma: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 70;
+        current_statement_begin__ = 72;
         if (!(context__.contains_r("sigma_ln_eDNA")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable sigma_ln_eDNA missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("sigma_ln_eDNA");
@@ -516,7 +519,7 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 66;
+            current_statement_begin__ = 68;
             std::vector<local_scalar_t__> intercept;
             size_t intercept_d_0_max__ = (has_inter ? 1 : 0 );
             intercept.reserve(intercept_d_0_max__);
@@ -526,28 +529,28 @@ public:
                 else
                     intercept.push_back(in__.scalar_constrain());
             }
-            current_statement_begin__ = 67;
+            current_statement_begin__ = 69;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> thetas;
             (void) thetas;  // dummy to suppress unused var warning
             if (jacobian__)
                 thetas = in__.vector_constrain(K, lp__);
             else
                 thetas = in__.vector_constrain(K);
-            current_statement_begin__ = 68;
+            current_statement_begin__ = 70;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> rand_betas_raw;
             (void) rand_betas_raw;  // dummy to suppress unused var warning
             if (jacobian__)
                 rand_betas_raw = in__.vector_constrain(K_r, lp__);
             else
                 rand_betas_raw = in__.vector_constrain(K_r);
-            current_statement_begin__ = 69;
+            current_statement_begin__ = 71;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> rand_sigma;
             (void) rand_sigma;  // dummy to suppress unused var warning
             if (jacobian__)
                 rand_sigma = in__.vector_lb_constrain(0, N_grp, lp__);
             else
                 rand_sigma = in__.vector_lb_constrain(0, N_grp);
-            current_statement_begin__ = 70;
+            current_statement_begin__ = 72;
             local_scalar_t__ sigma_ln_eDNA;
             (void) sigma_ln_eDNA;  // dummy to suppress unused var warning
             if (jacobian__)
@@ -555,22 +558,25 @@ public:
             else
                 sigma_ln_eDNA = in__.scalar_lb_constrain(0);
             // transformed parameters
-            current_statement_begin__ = 74;
+            current_statement_begin__ = 76;
             validate_non_negative_index("betas", "K", K);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> betas(K);
             stan::math::initialize(betas, DUMMY_VAR__);
             stan::math::fill(betas, DUMMY_VAR__);
-            current_statement_begin__ = 75;
+            current_statement_begin__ = 77;
             validate_non_negative_index("rand_betas", "K_r", K_r);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> rand_betas(K_r);
             stan::math::initialize(rand_betas, DUMMY_VAR__);
             stan::math::fill(rand_betas, DUMMY_VAR__);
             // transformed parameters block statements
-            current_statement_begin__ = 76;
-            stan::math::assign(betas, multiply(R_ast_inverse, thetas));
-            current_statement_begin__ = 77;
+            current_statement_begin__ = 78;
+            if (as_bool(K)) {
+                current_statement_begin__ = 79;
+                stan::math::assign(betas, multiply(R_ast_inverse, thetas));
+            }
+            current_statement_begin__ = 80;
             for (int k = 1; k <= K_r; ++k) {
-                current_statement_begin__ = 78;
+                current_statement_begin__ = 81;
                 stan::model::assign(rand_betas, 
                             stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list()), 
                             (get_base1(rand_betas_raw, k, "rand_betas_raw", 1) * get_base1(rand_sigma, get_base1(group, k, "group", 1), "rand_sigma", 1)), 
@@ -579,7 +585,7 @@ public:
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 74;
+            current_statement_begin__ = 76;
             size_t betas_j_1_max__ = K;
             for (size_t j_1__ = 0; j_1__ < betas_j_1_max__; ++j_1__) {
                 if (stan::math::is_uninitialized(betas(j_1__))) {
@@ -588,7 +594,7 @@ public:
                     stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable betas: ") + msg__.str()), current_statement_begin__, prog_reader__());
                 }
             }
-            current_statement_begin__ = 75;
+            current_statement_begin__ = 77;
             size_t rand_betas_j_1_max__ = K_r;
             for (size_t j_1__ = 0; j_1__ < rand_betas_j_1_max__; ++j_1__) {
                 if (stan::math::is_uninitialized(rand_betas(j_1__))) {
@@ -599,40 +605,43 @@ public:
             }
             // model body
             {
-            current_statement_begin__ = 82;
+            current_statement_begin__ = 85;
             validate_non_negative_index("mu_all", "(N_obs + N_cens)", (N_obs + N_cens));
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> mu_all((N_obs + N_cens));
             stan::math::initialize(mu_all, DUMMY_VAR__);
             stan::math::fill(mu_all, DUMMY_VAR__);
             stan::math::assign(mu_all,add(add((K ? stan::math::promote_scalar<local_scalar_t__>(multiply(Q_ast, thetas)) : stan::math::promote_scalar<local_scalar_t__>(rep_vector(0.0, (N_obs + N_cens))) ), csr_matrix_times_vector((N_obs + N_cens), K_r, w, v, u, rand_betas)), (has_inter ? stan::math::promote_scalar<local_scalar_t__>(get_base1(intercept, 1, "intercept", 1)) : stan::math::promote_scalar<local_scalar_t__>(0.0) )));
-            current_statement_begin__ = 87;
+            current_statement_begin__ = 90;
             validate_non_negative_index("mu_obs", "N_obs", N_obs);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> mu_obs(N_obs);
             stan::math::initialize(mu_obs, DUMMY_VAR__);
             stan::math::fill(mu_obs, DUMMY_VAR__);
             stan::math::assign(mu_obs,stan::model::rvalue(mu_all, stan::model::cons_list(stan::model::index_min_max(1, N_obs), stan::model::nil_index_list()), "mu_all"));
-            current_statement_begin__ = 88;
+            current_statement_begin__ = 91;
             validate_non_negative_index("mu_cens", "N_cens", N_cens);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> mu_cens(N_cens);
             stan::math::initialize(mu_cens, DUMMY_VAR__);
             stan::math::fill(mu_cens, DUMMY_VAR__);
             stan::math::assign(mu_cens,stan::model::rvalue(mu_all, stan::model::cons_list(stan::model::index_min((N_obs + 1)), stan::model::nil_index_list()), "mu_all"));
-            current_statement_begin__ = 91;
-            lp_accum__.add(normal_log<propto__>(intercept, prior_int_mu, prior_int_sd));
-            current_statement_begin__ = 92;
-            lp_accum__.add(gamma_log<propto__>(rand_sigma, 2, 0.1));
             current_statement_begin__ = 94;
-            for (int k = 1; k <= K; ++k) {
-                current_statement_begin__ = 95;
-                lp_accum__.add(normal_log<propto__>(get_base1(betas, k, "betas", 1), get_base1(prior_mu, k, "prior_mu", 1), get_base1(prior_sd, k, "prior_sd", 1)));
-            }
+            lp_accum__.add(normal_log<propto__>(intercept, prior_int_mu, prior_int_sd));
+            current_statement_begin__ = 95;
+            lp_accum__.add(gamma_log<propto__>(rand_sigma, 2, 0.1));
             current_statement_begin__ = 97;
-            lp_accum__.add(std_normal_log<propto__>(rand_betas_raw));
-            current_statement_begin__ = 99;
-            lp_accum__.add(exponential_log<propto__>(sigma_ln_eDNA, 1));
+            if (as_bool(K)) {
+                current_statement_begin__ = 98;
+                for (int k = 1; k <= K; ++k) {
+                    current_statement_begin__ = 99;
+                    lp_accum__.add(normal_log<propto__>(get_base1(betas, k, "betas", 1), get_base1(prior_mu, k, "prior_mu", 1), get_base1(prior_sd, k, "prior_sd", 1)));
+                }
+            }
             current_statement_begin__ = 101;
+            lp_accum__.add(std_normal_log<propto__>(rand_betas_raw));
+            current_statement_begin__ = 103;
+            lp_accum__.add(exponential_log<propto__>(sigma_ln_eDNA, 1));
+            current_statement_begin__ = 105;
             lp_accum__.add(normal_log(y_obs, mu_obs, sigma_ln_eDNA));
-            current_statement_begin__ = 102;
+            current_statement_begin__ = 106;
             lp_accum__.add(normal_cdf_log(L, mu_cens, sigma_ln_eDNA));
             }
         } catch (const std::exception& e) {
@@ -740,22 +749,25 @@ public:
         if (!include_tparams__ && !include_gqs__) return;
         try {
             // declare and define transformed parameters
-            current_statement_begin__ = 74;
+            current_statement_begin__ = 76;
             validate_non_negative_index("betas", "K", K);
             Eigen::Matrix<double, Eigen::Dynamic, 1> betas(K);
             stan::math::initialize(betas, DUMMY_VAR__);
             stan::math::fill(betas, DUMMY_VAR__);
-            current_statement_begin__ = 75;
+            current_statement_begin__ = 77;
             validate_non_negative_index("rand_betas", "K_r", K_r);
             Eigen::Matrix<double, Eigen::Dynamic, 1> rand_betas(K_r);
             stan::math::initialize(rand_betas, DUMMY_VAR__);
             stan::math::fill(rand_betas, DUMMY_VAR__);
             // do transformed parameters statements
-            current_statement_begin__ = 76;
-            stan::math::assign(betas, multiply(R_ast_inverse, thetas));
-            current_statement_begin__ = 77;
+            current_statement_begin__ = 78;
+            if (as_bool(K)) {
+                current_statement_begin__ = 79;
+                stan::math::assign(betas, multiply(R_ast_inverse, thetas));
+            }
+            current_statement_begin__ = 80;
             for (int k = 1; k <= K_r; ++k) {
-                current_statement_begin__ = 78;
+                current_statement_begin__ = 81;
                 stan::model::assign(rand_betas, 
                             stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list()), 
                             (get_base1(rand_betas_raw, k, "rand_betas_raw", 1) * get_base1(rand_sigma, get_base1(group, k, "group", 1), "rand_sigma", 1)), 
@@ -778,44 +790,44 @@ public:
             }
             if (!include_gqs__) return;
             // declare and define generated quantities
-            current_statement_begin__ = 106;
+            current_statement_begin__ = 110;
             validate_non_negative_index("log_lik", "(N_obs + N_cens)", (N_obs + N_cens));
             Eigen::Matrix<double, Eigen::Dynamic, 1> log_lik((N_obs + N_cens));
             stan::math::initialize(log_lik, DUMMY_VAR__);
             stan::math::fill(log_lik, DUMMY_VAR__);
             // generated quantities statements
             {
-            current_statement_begin__ = 108;
+            current_statement_begin__ = 112;
             validate_non_negative_index("X_obs_tmp", "N_obs", N_obs);
             validate_non_negative_index("X_obs_tmp", "(K + K_r)", (K + K_r));
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> X_obs_tmp(N_obs, (K + K_r));
             stan::math::initialize(X_obs_tmp, DUMMY_VAR__);
             stan::math::fill(X_obs_tmp, DUMMY_VAR__);
             stan::math::assign(X_obs_tmp,append_col(X_obs, X_obs_r));
-            current_statement_begin__ = 109;
+            current_statement_begin__ = 113;
             validate_non_negative_index("X_cens_tmp", "N_cens", N_cens);
             validate_non_negative_index("X_cens_tmp", "(K + K_r)", (K + K_r));
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, Eigen::Dynamic> X_cens_tmp(N_cens, (K + K_r));
             stan::math::initialize(X_cens_tmp, DUMMY_VAR__);
             stan::math::fill(X_cens_tmp, DUMMY_VAR__);
             stan::math::assign(X_cens_tmp,append_col(X_cens, X_cens_r));
-            current_statement_begin__ = 110;
+            current_statement_begin__ = 114;
             validate_non_negative_index("betas_tmp", "(K + K_r)", (K + K_r));
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> betas_tmp((K + K_r));
             stan::math::initialize(betas_tmp, DUMMY_VAR__);
             stan::math::fill(betas_tmp, DUMMY_VAR__);
             stan::math::assign(betas_tmp,append_row(betas, rand_betas));
-            current_statement_begin__ = 112;
+            current_statement_begin__ = 116;
             for (int n = 1; n <= N_obs; ++n) {
-                current_statement_begin__ = 114;
+                current_statement_begin__ = 118;
                 stan::model::assign(log_lik, 
                             stan::model::cons_list(stan::model::index_uni(n), stan::model::nil_index_list()), 
                             normal_log(get_base1(y_obs, n, "y_obs", 1), ((has_inter ? stan::math::promote_scalar<local_scalar_t__>(get_base1(intercept, 1, "intercept", 1)) : stan::math::promote_scalar<local_scalar_t__>(0.0) ) + multiply(get_base1(X_obs_tmp, n, "X_obs_tmp", 1), betas_tmp)), sigma_ln_eDNA), 
                             "assigning variable log_lik");
             }
-            current_statement_begin__ = 117;
+            current_statement_begin__ = 121;
             for (int n = 1; n <= N_cens; ++n) {
-                current_statement_begin__ = 118;
+                current_statement_begin__ = 122;
                 stan::model::assign(log_lik, 
                             stan::model::cons_list(stan::model::index_uni((n + N_obs)), stan::model::nil_index_list()), 
                             normal_cdf_log(get_base1(L, n, "L", 1), ((has_inter ? stan::math::promote_scalar<local_scalar_t__>(get_base1(intercept, 1, "intercept", 1)) : stan::math::promote_scalar<local_scalar_t__>(0) ) + multiply(get_base1(X_cens_tmp, n, "X_cens_tmp", 1), betas_tmp)), sigma_ln_eDNA), 
@@ -823,7 +835,7 @@ public:
             }
             }
             // validate, write generated quantities
-            current_statement_begin__ = 106;
+            current_statement_begin__ = 110;
             size_t log_lik_j_1_max__ = (N_obs + N_cens);
             for (size_t j_1__ = 0; j_1__ < log_lik_j_1_max__; ++j_1__) {
                 vars__.push_back(log_lik(j_1__));
